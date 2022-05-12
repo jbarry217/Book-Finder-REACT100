@@ -20,7 +20,7 @@ module.exports = {
   },
 
   module: {
-    rules: [
+    loaders: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
@@ -30,10 +30,6 @@ module.exports = {
         test: /\.html$/,
         loader: 'file?name=[name].[ext]',
       },
-      {
-        test:/\.(s*)css$/,
-        use:['style-loader','css-loader', 'sass-loader']
-      }
     ],
   },
 };
