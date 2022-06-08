@@ -27,7 +27,7 @@ class App extends Component {
         this.setState({ searchObj : searchObjClone });
     }
 
-    newSearch(event){  
+    newSearch(){  
         const api_key = process.env.API_KEY;
         if(this.state.searchObj.select == "author"){
             var URL = `https://www.googleapis.com/books/v1/volumes?q=+inauthor:${this.state.searchObj.searched}&key=${api_key}+&maxResults=40`
@@ -38,6 +38,7 @@ class App extends Component {
         .then((bookObj) => {
             // const bookListClone = JSON.parse(JSON.stringify(this.state.bookInfo));
             // bookListClone.push(bookObj.data);
+            console.log(bookObj.data.items[0].volumeInfo.industryIdentifiers[0].identifier)
             this.setState({ bookInfo : bookObj.data.items})
         })
         
@@ -51,13 +52,13 @@ class App extends Component {
 
             <div className='container'>
             <div className='row1'>
-                <h1 className='font-bold text-center text-4xl py-5 lg:text-6xl'>Book Finder</h1>
+                <h1 className='font-bold text-center text-4xl pt-5 lg:text-6xl'>Book Finder</h1>
             </div>
                 <div className='row2'>
-                <h2> Find Your Book </h2>
+                <h4 className='text-center pb-3'> Find Your Book </h4>
                 </div>
                     <div className='search'>
-                    <div className="input-group input-lg">
+                    <div className="input-group input-lg text-center">
                         <input className='search-box' name= "searched" type= "text" value={this.state.searchObj.searched} placeholder='Type an author or book name' onChange={(e) => this.textChange(e)}/>
                         <select className='search-type' name='select' value ={this.state.searchObj.select} onChange={(e) => this.textChange(e)}>
                             <option>Search by...</option>
@@ -67,7 +68,7 @@ class App extends Component {
                     </div>
                     </div>
                     <button 
-                        onClick={(e) => this.newSearch(e)}
+                        onClick={() => this.newSearch()}
                         className='btn btn-block px-5' 
                         type= "submit" 
                         name= "submit">
@@ -78,16 +79,18 @@ class App extends Component {
                 
             {
                 this.state.bookInfo.length===0 ? <Welcome /> : 
-                this.state.bookInfo.map(item => {
+                this.state.bookInfo.map((item, index) => {
+                    try{
                     return(
                     <Booklist 
-                            key={item.id}
+                            key={index}
                             title={item.volumeInfo.title}
                             author={item.volumeInfo.authors}
                             published={item.volumeInfo.publishedDate}
                             publisher={item.volumeInfo.publisher}
                             description={item.volumeInfo.description}
                             rating={item.volumeInfo.averageRating}
+                            isbn={item.volumeInfo.industryIdentifiers[0].identifier}
                             thumbnail={item.volumeInfo.imageLinks.thumbnail}
                             handleChange={this.handleChange}
                             textChange={this.textChange}
@@ -95,7 +98,20 @@ class App extends Component {
                             searched={item.searched}
                             select={item.select}
                     />
-                    )
+                    )}
+                    catch(err){
+                        <Booklist 
+                            key={index}
+                            title={item.volumeInfo.title}
+                            author={item.volumeInfo.authors}
+                            published={item.volumeInfo.publishedDate}
+                            publisher={item.volumeInfo.publisher}
+                            description={item.volumeInfo.description}
+                            rating={item.volumeInfo.averageRating}
+                            isbn={item.volumeInfo.industryIdentifiers[0].identifier}
+                            thumbnail="https://flyclipart.com/book-png-images-transparent-free-download-book-png-569995"
+                        />
+                    }
                 })
             }
                 </div>
