@@ -9,23 +9,30 @@ export default props => (
                 <thread>
                     <tr>
                         <th scope="col-sm-3"><img src={props.thumbnail} alt= ""/></th> 
-                        <th scope='col-sm-7"'>
-                            <h5>Title: {props.title}</h5>
-                            <br/>
-                            <h7>Author: {props.author}</h7>
-                            <br/>
-                            <h7>Published Date: {props.published}</h7>
-                            <br/>
-                            <h7>Average Rating: {props.rating}</h7>
-                            <br/>
-                            <p>Description: {props.description}</p>
-                        </th>
-                        <th scope='col-sm-2'>
+                        <th scope='col-sm-7' alt= "">
+                        <h5>Title: {props.title}</h5>
+                        <p>Description: {props.description}</p>
+                            <ul className="mb-4">
+                                <li>
+                                    <span className="font-bold">Author:</span> {props.author}
+                                </li>
+                                <li>
+                                    <span className="font-bold">Published Date:</span> {props.published}
+                                </li>   
+                                <li>
+                                    <span className="font-bold">Publisher:</span> {props.publisher}
+                                </li>
+                                <li>
+                                <span className="font-bold">Average Rating:</span>  {props.rating}
+                                </li>
+                            </ul>
+                        <div class="d-grid gap-2 col-3 mx-auto">
                             <a className='btn btn-primary' 
                             name= "button" 
                             type= "button"> 
                             Look on Open Library 
                             </a>
+                        </div>
                         </th>
                     </tr>
                 </thread>

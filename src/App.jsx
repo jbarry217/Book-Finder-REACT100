@@ -38,9 +38,9 @@ class App extends Component {
         .then((bookObj) => {
             // const bookListClone = JSON.parse(JSON.stringify(this.state.bookInfo));
             // bookListClone.push(bookObj.data);
-            console.log(bookObj.data)
             this.setState({ bookInfo : bookObj.data.items})
         })
+        
         .catch((error) => {
             console.log("error");
         })
@@ -51,7 +51,7 @@ class App extends Component {
 
             <div className='container'>
             <div className='row1'>
-                <h1>Book Finder</h1>
+                <h1 className='font-bold text-center text-4xl py-5 lg:text-6xl'>Book Finder</h1>
             </div>
                 <div className='row2'>
                 <h2> Find Your Book </h2>
@@ -68,15 +68,14 @@ class App extends Component {
                     </div>
                     <button 
                         onClick={(e) => this.newSearch(e)}
-                        className='btn btn-block' 
+                        className='btn btn-block px-5' 
                         type= "submit" 
                         name= "submit">
                         Search
                         </button>
             
-            <div className='row3'>
-                <div className='card'>
-            
+            <div>
+                
             {
                 this.state.bookInfo.length===0 ? <Welcome /> : 
                 this.state.bookInfo.map(item => {
@@ -86,9 +85,10 @@ class App extends Component {
                             title={item.volumeInfo.title}
                             author={item.volumeInfo.authors}
                             published={item.volumeInfo.publishedDate}
+                            publisher={item.volumeInfo.publisher}
                             description={item.volumeInfo.description}
                             rating={item.volumeInfo.averageRating}
-                            thumbnail={item.volumeInfo.imageLinks.smallThumbnail}
+                            thumbnail={item.volumeInfo.imageLinks.thumbnail}
                             handleChange={this.handleChange}
                             textChange={this.textChange}
                             bookObj={item}
@@ -100,7 +100,7 @@ class App extends Component {
             }
                 </div>
             </div>
-            </div>
+          
 
         );
     };
