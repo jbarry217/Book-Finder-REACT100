@@ -16,7 +16,7 @@ class App extends Component {
             },
 
             bookInfo: [],
-            libraryInfo: []
+            // libraryInfo: []
         };
         this.textChange = this.textChange.bind(this);
         this.newSearch = this.newSearch.bind(this);
@@ -41,22 +41,27 @@ class App extends Component {
             // const bookListClone = JSON.parse(JSON.stringify(this.state.bookInfo));
             // bookListClone.push(bookObj.data);
             this.setState({ bookInfo : bookObj.data.items})
+
         })
+        .then(console.log(this.state.bookInfo))
         
+
         .catch((error) => {
             console.log("error");
         })
     };
 
-    librarySearch(i){
-        console.log("library Search")
-        var isbnNumber = this.state.bookInfo[i].volumeInfo.industryIdentifiers[0].identifier;
-        const libaryURL = `http://openlibrary.org/api/volumes/brief/isbn/${isbnNumber}.json`
-        axios.get(libaryURL)
-        .then((libaryObj) => {
-        this.setState({ libraryInfo : libaryObj })
-    })
-    };
+    // librarySearch(i){
+    //     console.log(i);
+    //     console.log("library Search")
+    //     var isbnNumber = this.state.bookInfo[i].volumeInfo.industryIdentifiers[0].identifier;
+    
+    //     const libaryURL = `http://openlibrary.org/api/volumes/brief/isbn/${isbnNumber}.json`
+    //     axios.get(libaryURL)
+    //     .then((libaryObj) => {
+    //     this.setState({ libraryInfo : libaryObj })
+    // })
+    // };
 
     render() {
         return (
@@ -94,6 +99,7 @@ class App extends Component {
                     return(
                     <Booklist 
                             key={index}
+                            index={index}
                             title={item.volumeInfo.title}
                             author={item.volumeInfo.authors}
                             published={item.volumeInfo.publishedDate}
@@ -103,7 +109,7 @@ class App extends Component {
                             thumbnail={item.volumeInfo.imageLinks.thumbnail}
                             handleChange={this.handleChange}
                             textChange={this.textChange}
-                            // librarySearch={() => this.librarySearch(index)}
+                            librarySearch={this.librarySearch}
                             bookObj={item}
                             searched={item.searched}
                             select={item.select}
@@ -123,8 +129,8 @@ class App extends Component {
                     }
                 })
             }
-
-            {/* {
+{/* 
+            {
                 this.state.libraryInfo.map(info => (
                     <Booklist
                             key={info.id}

@@ -3,20 +3,22 @@ import App from './App'
 
 export default props => {
     return(
-<div className="container mb-5">
+<div className="container mt-5 mb-5">
     <div className="row">
 
-        <div className='col-2'>
+        <div className='col-4'>
             <img src= {props.thumbnail} alt= "" className="block mx-auto w-2/3"/>
     
             <div>
+            <a href={`https://openlibrary.org/isbn/${props.isbn}`} target="_blank">
                 <button className='btn btn-primary mt-4 mb-5 px-3' 
                     name= "button" 
                     type= "button"
-                    // onClick={this.props.librarySearch(i)}
                     > 
                     Open Library 
                 </button>
+            </a>
+
             </div>
         </div>
         <div className='col-xl-10 col-lg-10 col-md-8 col-sm-6'>
