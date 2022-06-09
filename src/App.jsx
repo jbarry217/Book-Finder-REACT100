@@ -78,7 +78,7 @@ class App extends Component {
                         </select>
                     <button 
                         onClick={() => this.newSearch()}
-                        className='search-button btn btn-primary text center col-1' 
+                        className='search-button btn btn-dark text center col-1' 
                         type= "submit" 
                         name= "submit">
                         Search
@@ -99,7 +99,6 @@ class App extends Component {
                             published={item.volumeInfo.publishedDate}
                             publisher={item.volumeInfo.publisher}
                             description={item.volumeInfo.description}
-                            rating={item.volumeInfo.averageRating}
                             isbn={item.volumeInfo.industryIdentifiers[0].identifier}
                             thumbnail={item.volumeInfo.imageLinks.thumbnail}
                             handleChange={this.handleChange}
@@ -118,7 +117,6 @@ class App extends Component {
                             published={item.volumeInfo.publishedDate}
                             publisher={item.volumeInfo.publisher}
                             description={item.volumeInfo.description}
-                            rating={item.volumeInfo.averageRating}
                             isbn={item.volumeInfo.industryIdentifiers[0].identifier}
                             thumbnail="https://flyclipart.com/book-png-images-transparent-free-download-book-png-569995"
                         />
