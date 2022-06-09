@@ -5,8 +5,8 @@ export default props => {
     return(
 <div className="container mt-5 mb-5">
     <div className="row">
-
-        <div className='col-4'>
+    
+        <div className='col-2'>
             <img src= {props.thumbnail} alt= "" className="block mx-auto w-2/3"/>
     
             <div>
@@ -21,7 +21,7 @@ export default props => {
 
             </div>
         </div>
-        <div className='col-xl-10 col-lg-10 col-md-8 col-sm-6'>
+        <div className='col-10'>
             <div>
                 <h5 className='font-bold text-4xl mb-3'>{props.title}</h5>
                 <p className="mb-4">{props.description}</p>

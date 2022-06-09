@@ -123,7 +123,7 @@ class App extends Component {
                             published={item.volumeInfo.publishedDate}
                             publisher={item.volumeInfo.publisher}
                             description={item.volumeInfo.description}
-                            isbn={item.volumeInfo.industryIdentifiers[0].identifier}
+                            isbn=""
                             thumbnail="https://flyclipart.com/book-png-images-transparent-free-download-book-png-569995"
                         />
                     }
