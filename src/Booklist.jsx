@@ -1,15 +1,17 @@
 import React from 'react';
 import App from './App'
 
-export default props => (
-<section>
-    <div>
-        <img src= {props.thumbnail} alt= ""/>
-    </div>
+export default props => {
+    return(
+<row>
     
+    <div className='col-2'>
+        <img src= {props.thumbnail} alt= "" className="block mx-auto w-1/2"/>
+    </div>
+    <div className='col-10'>
     <div>
-        <h5>{props.title}</h5>
-        <p>{props.description}</p>
+        <h5 className='font-bold my-2 text-2xl mb-2'>{props.title}</h5>
+        <p className="mb-4">{props.description}</p>
     </div> 
 
         <ul className="mb-4">
@@ -29,13 +31,16 @@ export default props => (
                 <span className="fw-bold">ISBN:</span>  {props.isbn}
             </li>
         </ul>
-            <div className="d-grid gap-2 col-3 mx-auto">
-                <a className='btn btn-primary' 
+    </div>
+            <div>
+                <button className='btn btn-primary mb-5' 
                     name= "button" 
-                    type= "button"> 
+                    type= "button"
+                    // onClick={this.props.librarySearch(i)}
+                    > 
                     Look on Open Library 
-                </a>
+                </button>
             </div>
-       
-</section>
+</row>
 );
+}
