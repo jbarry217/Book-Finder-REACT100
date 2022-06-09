@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { resolve } from 'bluebird';
 import React, { Component } from 'react';
-import Booklist from './Booklist';
-import Welcome from './Welcome'
+import Booklist from './Components/Booklist';
+import Welcome from './Components/Welcome'
+import Inputs from './Components/Inputs'
 
 
 class App extends Component {
@@ -16,11 +17,10 @@ class App extends Component {
             },
 
             bookInfo: [],
-            // libraryInfo: []
+            
         };
         this.textChange = this.textChange.bind(this);
         this.newSearch = this.newSearch.bind(this);
-        // this.librarySearch =this.librarySearch.bind(this);
     }
 
     textChange(event){
@@ -38,8 +38,6 @@ class App extends Component {
         }
         axios.get(URL) 
         .then((bookObj) => {
-            // const bookListClone = JSON.parse(JSON.stringify(this.state.bookInfo));
-            // bookListClone.push(bookObj.data);
             this.setState({ bookInfo : bookObj.data.items})
 
         })
@@ -51,18 +49,6 @@ class App extends Component {
         })
     };
 
-    // librarySearch(i){
-    //     console.log(i);
-    //     console.log("library Search")
-    //     var isbnNumber = this.state.bookInfo[i].volumeInfo.industryIdentifiers[0].identifier;
-    
-    //     const libaryURL = `http://openlibrary.org/api/volumes/brief/isbn/${isbnNumber}.json`
-    //     axios.get(libaryURL)
-    //     .then((libaryObj) => {
-    //     this.setState({ libraryInfo : libaryObj })
-    // })
-    // };
-
     render() {
         return (
 
@@ -73,25 +59,10 @@ class App extends Component {
                 <div className='row2'>
                 <h4 className='text-center pb-5'> Find Your Book </h4>
                 </div>
-                    <div className='search'>
-                    <div className="input-group pb-5">
-                        <input className='search-box text-center col-5' name= "searched" type= "text" value={this.state.searchObj.searched} placeholder='Type an author or book name' onChange={(e) => this.textChange(e)}/>
-                        <select className='search-type col-2 text-center ' name='select' value ={this.state.searchObj.select} onChange={(e) => this.textChange(e)}>
-                            <option>Search by...</option>
-                            <option value= "author">Author</option>
-                            <option value="title">Title</option>
-                        </select>
-                    <button 
-                        onClick={() => this.newSearch()}
-                        className='search-button btn btn-dark text center col-1' 
-                        type= "submit" 
-                        name= "submit">
-                        Search
-                        </button>
-                        </div>
-                    </div>
-            <div >
-                
+
+                <Inputs searchObj={this.state.searchObj} newSearch={this.newSearch} textChange={this.textChange}/>
+
+            <div> 
             {
                 this.state.bookInfo.length===0 ? <Welcome /> : 
                 this.state.bookInfo.map((item, index) => {

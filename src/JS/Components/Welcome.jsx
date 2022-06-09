@@ -1,5 +1,5 @@
 import React from 'react'
-import App from './App'
+
               
 export class Welcome extends React.Component{
 
