@@ -62,57 +62,47 @@ class App extends Component {
 
                 <Inputs searchObj={this.state.searchObj} newSearch={this.newSearch} textChange={this.textChange}/>
 
-            <div> 
-            {
-                this.state.bookInfo.length===0 ? <Welcome /> : 
-                this.state.bookInfo.map((item, index) => {
-                    try{
-                    return(
-                    <Booklist 
-                            key={index}
-                            index={index}
-                            title={item.volumeInfo.title}
-                            author={item.volumeInfo.authors}
-                            published={item.volumeInfo.publishedDate}
-                            publisher={item.volumeInfo.publisher}
-                            description={item.volumeInfo.description}
-                            isbn={item.volumeInfo.industryIdentifiers[0].identifier}
-                            thumbnail={item.volumeInfo.imageLinks.thumbnail}
-                            handleChange={this.handleChange}
-                            textChange={this.textChange}
-                            librarySearch={this.librarySearch}
-                            bookObj={item}
-                            searched={item.searched}
-                            select={item.select}
-                    />
-                    )}
-                    catch(err){
-                        <Booklist 
-                            key={index}
-                            title={item.volumeInfo.title}
-                            author={item.volumeInfo.authors}
-                            published={item.volumeInfo.publishedDate}
-                            publisher={item.volumeInfo.publisher}
-                            description={item.volumeInfo.description}
-                            isbn=""
-                            thumbnail="https://flyclipart.com/book-png-images-transparent-free-download-book-png-569995"
-                        />
-                    }
-                })
-            }
-{/* 
-            {
-                this.state.libraryInfo.map(info => (
-                    <Booklist
-                            key={info.id}
-                            name={info.name}
-                            url={info.records.recordURL}
-                            libraryObj={info}
-                    />
-                ))
-            } */}
-                </div>
+                    <div> 
+                    {
+                    this.state.bookInfo.length===0 ? <Welcome /> : 
+                    this.state.bookInfo.map((item, index) => {
+                        try{
+                            return(
+                            <Booklist 
+                                    key={index}
+                                    index={index}
+                                    title={item.volumeInfo.title}
+                                    author={item.volumeInfo.authors}
+                                    published={item.volumeInfo.publishedDate}
+                                    publisher={item.volumeInfo.publisher}
+                                    description={item.volumeInfo.description}
+                                    isbn={item.volumeInfo.industryIdentifiers[0].identifier}
+                                    thumbnail={item.volumeInfo.imageLinks.thumbnail}
+                                    handleChange={this.handleChange}
+                                    textChange={this.textChange}
+                                    librarySearch={this.librarySearch}
+                                    bookObj={item}
+                                    searched={item.searched}
+                                    select={item.select}
+                            />
+                            )
+                        }
+                            catch(err){
+                                <Booklist 
+                                    key={index}
+                                    title={item.volumeInfo.title}
+                                    author={item.volumeInfo.authors}
+                                    published={item.volumeInfo.publishedDate}
+                                    publisher={item.volumeInfo.publisher}
+                                    description={item.volumeInfo.description}
+                                    isbn=""
+                                    thumbnail="https://flyclipart.com/book-png-images-transparent-free-download-book-png-569995"
+                                />
+                            }
+                    })
+                }
             </div>
+        </div>
           
 
         );
