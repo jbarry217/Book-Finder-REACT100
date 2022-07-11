@@ -14,7 +14,7 @@ module.exports = {
     new webpack.DefinePlugin(envKeys)
   ],
 
-  context: path.join(__dirname, 'public/src'),
+  context: path.join(__dirname, '/src'),
 
   entry: {
     javascript: './index'
