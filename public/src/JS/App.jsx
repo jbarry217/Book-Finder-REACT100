@@ -72,7 +72,7 @@ class App extends Component {
                                     key={index}
                                     index={index}
                                     title={item.volumeInfo.title}
-                                    author={item.volumeInfo.authors}
+                                    author={item.volumeInfo.authors }
                                     published={item.volumeInfo.publishedDate}
                                     publisher={item.volumeInfo.publisher}
                                     description={item.volumeInfo.description}
@@ -91,7 +91,7 @@ class App extends Component {
                                 <Booklist 
                                     key={index}
                                     title={item.volumeInfo.title}
-                                    author={item.volumeInfo.authors}
+                                    author={item.volumeInfo.authors }
                                     published={item.volumeInfo.publishedDate}
                                     publisher={item.volumeInfo.publisher}
                                     description={item.volumeInfo.description}

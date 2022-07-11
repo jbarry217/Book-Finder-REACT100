@@ -29,7 +29,7 @@ export default props => {
 
             <ul className="mb-5">
                 <li>
-                    <span className="fw-bold">Author:</span> {props.author}
+                    <span className="fw-bold">Author:</span> {props.author }
                 </li>
                 <li>
                     <span className="fw-bold">Published Date:</span> {props.published}
