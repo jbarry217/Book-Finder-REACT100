@@ -30,23 +30,10 @@ class App extends Component {
     }
 
     newSearch(){  
-        const api_key = process.env.API_KEY;
-        if(this.state.searchObj.select == "author"){
-            var URL = `https://www.googleapis.com/books/v1/volumes?q=+inauthor:${this.state.searchObj.searched}&key=${api_key}+&maxResults=40`
-        } else if (this.state.searchObj.select == "title"){
-            var URL = `https://www.googleapis.com/books/v1/volumes?q=+intitle:${this.state.searchObj.searched}&key=${api_key}+&maxResults=40`
-        }
-        axios.get(URL) 
-        .then((bookObj) => {
-            this.setState({ bookInfo : bookObj.data.items})
-
-        })
-        .then(console.log(this.state.bookInfo))
-        
-
-        .catch((error) => {
-            console.log("error");
-        })
+       axios.get(`/googleBooksAPI/${this.state.searchObj.select}/${this.state.searchObj.searched}`)
+       .then(items => 
+        this.setState({ bookInfo : items.data})
+        )
     };
 
     render() {

@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 
+require('dotenv').config();
 
 const api_key = process.env.API_KEY;
 const app = express();
@@ -9,23 +10,31 @@ const app = express();
 app.use(express.static('dist'));
 app.use(express.static('public'));
 
-app.get('/api', (req, res) => {
+app.get('/googleBooksAPI/:select/:searched', (req, res) => {
 
-   if(props.searchObj.select == "author"){
-        var URL = `https://www.googleapis.com/books/v1/volumes?q=+inauthor:&key={api_key}`
-    } else if (props.searchObj.select == "title"){
-        var URL = `https://www.googleapis.com/books/v1/volumes?q=+intitle:&key={api_key}`
-    }
-    axios.get(URL)
+        if(req.params.select == "author"){
+            var URL = `https://www.googleapis.com/books/v1/volumes?q=+inauthor:${req.params.searched}&key=${api_key}+&maxResults=40`
+        } else if (req.params.select == "title"){
+            var URL = `https://www.googleapis.com/books/v1/volumes?q=+intitle:${req.params.searched}&key=${api_key}+&maxResults=40`
+        }
+        axios.get(URL) 
         .then((bookObj) => {
-            bookList.push(bookObj.data);
-            res.send(bookObj.data)
-        })
-        .then(bookList => this.setState({ bookList }))
+            res.send(bookObj.data.items)
+        })        
         .catch((error) => {
-            console.error(error);
-            res.send('An error occured.');
+            console.log("error");
         })
+   
+    // axios.get(URL)
+    //     .then((bookObj) => {
+    //         bookList.push(bookObj.data);
+    //         res.send(bookObj.data)
+    //     })
+    //     .then(bookList => this.setState({ bookList }))
+    //     .catch((error) => {
+    //         console.error(error);
+    //         res.send('An error occured.');
+    //     })
     
 });
 
